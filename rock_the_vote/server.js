@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 // DB connect
-mongoose.connect('mongodb://localhost:27017',
+mongoose.connect('mongodb://localhost:27017/rock_the_vote',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
