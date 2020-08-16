@@ -1,63 +1,62 @@
 const express = require('express')
-inventoryRouter = express.Router()
-const Inventory = require('../models/inventory.js')
-
+const authRouter = express.Router()
+const User = require('../models/user.js')
 
 // get all, post new
-inventoryRouter.route("/")
+authRouter.route("/")
     .get((req, res, next) => {
-        Inventory.find((err, items) => {
+        User.find((err, users) => {
             if(err){
                 res.status(500)
                 return next(err)
             }
-            return res.status(200).send(items)
+            return res.status(200).send(users)
         })
     })
     .post((req, res, next) => {
-        const newItem = new Inventory(req.body)
-        newItem.save((err, savedItem) => {
+        const newUser = new User(req.body)
+        newUser.save((err, savedUser) => {
             if(err){
                 res.status(500)
                 return next(err)
             }
-            return res.status(201).send(savedItem)
+            return res.status(201).send(savedUser)
             })
     })
 
-// get one, edit one, delete one
-inventoryRouter.route("/:itemId")
+// get one, update one, delete one
+authRouter.route("/:email")
     .get((req, res, next) => {
-        Inventory.findById(req.params.itemId,
-            (err, item) => {
+        User.findOne({email: req.params.email}, {username, memberSince, email},
+            (err, user) => {
                 if(err){
                     res.status(500)
                     return next(err)
                 }
-                return res.status(200).send(item)
+                return res.status(200).send(user)
             })
     })
     .put((req, res, next) => {
-        Inventory.findByIdAndUpdate(req.params.itemId,
+        User.findOneAndUpdate({email: req.params.email},
             req.body,
             {new: true},
-            (err, updatedItem) => {
+            (err, updatedUser) => {
                 if(err){
                     res.status(500)
                     return next(err)
                 }
-                return res.status(201).send(updatedItem)
+                return res.status(201).send(updatedUser)
             })
     })
     .delete((req, res, next) => {
-        Inventory.findByIdAndDelete(req.params.itemId,
-            (err, deletedItem) => {
+        User.findOneAndDelete({email: req.params.email},
+            (err, deletedUser) => {
                 if(err){
                     res.status(500)
                     return next(err)
                 }
-                return res.status(200).send(`Successfully deleted ${deletedItem.name}`)
+                return res.status(200).send(`Successfully deleted ${deletedUser.username}`)
             })
     })
 
-module.exports = inventoryRouter
+module.exports = authRouter
