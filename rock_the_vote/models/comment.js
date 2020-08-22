@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { schema } = require('./user')
 const Schema = mongoose.Schema
 
 const commentSchema = new Schema({
@@ -7,8 +6,8 @@ const commentSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    username: {
-        type: Schema.Types.String,
+    user: {
+        type: Schema.Types.ObjectId,
         ref: "User",
         required: true
     },
