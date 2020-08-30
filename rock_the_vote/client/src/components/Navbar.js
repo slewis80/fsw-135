@@ -7,8 +7,8 @@ export default function Navbar(props) {
         <div className="navbar">
             <Link to="/profile">Profile</Link>
             <Link to="/issues">Issues</Link>
-            <Link to="/comments">Comments</Link>
-            <Link to="/">Logout</Link>
+            <Link to="/mystuff">Mystuff</Link>
+            <Link to="/" onClick={props.logout}>Logout</Link>
         </div>
     )
 }

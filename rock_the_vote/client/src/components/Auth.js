@@ -35,7 +35,7 @@ export default function Auth() {
     
 
     return (
-        <div className="authContainer">
+        <div className="container">
             <h1>Rock The Vote</h1>
             {!toggle ?
                 <>

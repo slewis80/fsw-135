@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const commentSchema = new Schema({
-    postDate: {
+    commentDate: {
         type: Date,
         default: Date.now
     },

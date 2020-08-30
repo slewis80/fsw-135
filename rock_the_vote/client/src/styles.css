@@ -21,32 +21,32 @@
   font-weight: bold;
 }
 
-.authContainer {
+.container {
   display: flex;
   align-items: center;
   flex-direction: column;
   height: 100vh;
 }
 
-.authContainer > h1 {
+.container > h1 {
   font-size: 3em;
   font-family: 'Permanent Marker', cursive;
   color: firebrick;
   margin: 24px;
 }
 
-.authContainer > p {
+.container > p {
   margin: 16px;
   color: firebrick;
   font-weight: bold;
   text-decoration: underline;
 }
 
-.authContainer > p:hover {
+.container > p:hover {
   cursor: pointer;
 }
 
-.authContainer > form {
+.container > form {
   border: 2px solid rgba(95, 22, 22, 0.6);
   padding: 20px;
   border-radius: 5px;
@@ -56,15 +56,29 @@
   flex-direction: column;
 }
 
-.authContainer > form > input {
+.container > form > input {
   margin: 16px 8px;
   padding: 8px;
   border-radius: 4px;
 }
 
-.authContainer > form > button {
+.container > form > textarea {
+  margin: 16px 8px;
+  padding: 8px;
+  border-radius: 4px;
+  height: 200px;
+}
+
+.container > form > button {
   margin: 16px 8px;
   padding: 8px;
   border-radius: 4px;
 }
 
+.issueContainer {
+  border: 2px solid rgba(95, 22, 22, 0.6);
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #aaa9;
+  margin: 10px;
+}

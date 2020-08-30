@@ -22,6 +22,7 @@ mongoose.connect('mongodb://localhost:27017/rock_the_vote',
 
 // routes
 app.use("/auth", require('./routes/authRouter.js'))
+app.use("/publicIssues", require('./routes/publicIssueRouter.js'))
 app.use("/api", expressJwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
 app.use("/api/issues", require('./routes/issueRouter.js'))
 app.use("/api/comments", require('./routes/commentRouter.js'))
