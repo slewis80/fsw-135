@@ -8,7 +8,7 @@ const issueSchema = new Schema({
         required: true
     },
     postDate: {
-        type: Date,
+        type: Date, 
         default: Date.now
     },
     description: {
@@ -29,5 +29,20 @@ const issueSchema = new Schema({
         required: true
     }
 })
+
+
+// methods to handle upvotes and downvotes
+issueSchema.methods.addUpvote = function(){
+    const issue = this.toObject()
+    let upvotes = upvotes + 1
+    return upvotes
+}
+
+issueSchema.methods.addDownvote = function(){
+    const issue = this.toObject()
+    let downvotes = downvotes + 1
+    return downvotes
+}
+
 
 module.exports = mongoose.model("Issue", issueSchema)

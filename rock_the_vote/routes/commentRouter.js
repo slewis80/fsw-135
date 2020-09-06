@@ -61,7 +61,7 @@ commentRouter.route("/:commentId")
         })
     })
     .put((req, res, next) => {
-        Comment.findOneAndUpdate({ _id: req.params.issueId, user: req.user._id },
+        Comment.findOneAndUpdate({ _id: req.params.issueId, user: req.user._id},
             req.body,
             { new: true },
             (err, updatedComment) => {

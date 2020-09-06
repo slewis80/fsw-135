@@ -12,10 +12,12 @@ userAxios.interceptors.request.use(config => {
 })
 
 export default function UserProvider(props) {
+    // state
     const ititState = {
         user: JSON.parse(localStorage.getItem("user")) || {},
         token: localStorage.getItem("token") || "",
-        issues: []
+        issues: [],
+        errMsg: ""
     }
 
     const [userState, setUserState] = useState(ititState)
@@ -32,7 +34,7 @@ export default function UserProvider(props) {
                     token
                 }))
             })
-            .catch(err => console.log(err.response.data.errMsg))
+            .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     function login(credentials) {
@@ -48,7 +50,7 @@ export default function UserProvider(props) {
                 token
             }))
         })
-        .catch(err => console.log(err.response.data.errMsg))
+        .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     function logout() {
@@ -59,6 +61,20 @@ export default function UserProvider(props) {
             token: "",
             issues: []
         })
+    }
+
+    function handleAuthErr(errMsg){
+        setUserState(prevUserState => ({
+            ...prevUserState,
+            errMsg
+        }))
+    }
+
+    function resetAuthErr(){
+        setUserState(prevUserState => ({
+            ...prevUserState,
+            errMsg: ""
+        }))
     }
 
 
@@ -82,7 +98,8 @@ export default function UserProvider(props) {
                 login,
                 logout,
                 addIssue,
-                userAxios
+                userAxios,
+                resetAuthErr
                 }}>
             {props.children}
         </UserContext.Provider>

@@ -9,7 +9,8 @@ export default function AuthForm(props) {
         inputs: {
             username,
             password
-        }
+        },
+        errMsg
     } = props
     
 
@@ -28,6 +29,7 @@ export default function AuthForm(props) {
                 onChange={handleChange}
                 placeholder="Password" />
             <button>{btnTxt}</button>
+            <p style={{color: "red"}}>{errMsg}</p>
         </form>
     )
 }

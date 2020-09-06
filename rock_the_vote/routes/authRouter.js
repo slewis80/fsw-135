@@ -2,6 +2,7 @@ const express = require('express')
 const authRouter = express.Router()
 const User = require('../models/user.js')
 const jwt = require('jsonwebtoken')
+const user = require('../models/user.js')
 
 // signup
 authRouter.post("/signup", (req, res, next) => {

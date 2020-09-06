@@ -13,31 +13,10 @@ userAxios.interceptors.request.use(config => {
 
 export default function IssueProvider(props) {
 
-    const initCommentState = {
-        comments: []
-    }
-
-
-    const [commentState, setCommentState] = useState(initCommentState)
-
-
-    function addComment(newComment) {
-        userAxios.post("/api/comments", newComment)
-        .then(res => {
-            setCommentState(prevState => ({
-                comments: [...prevState.comments, res.data]
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
-    }
 
 
     return(
-        <IssueContext.Provider
-            value={{
-                ...commentState,
-                addComment
-            }}>
+        <IssueContext.Provider>
             {props.children}
         </IssueContext.Provider>
     )

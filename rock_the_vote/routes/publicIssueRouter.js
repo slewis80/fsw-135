@@ -11,6 +11,7 @@ publicIssueRouter.get("/", (req, res, next) => {
             }
             return res.status(200).send(issues)
         })
+        .populate('user', 'username')
     })
 
 module.exports = publicIssueRouter
