@@ -12,12 +12,16 @@
   justify-content: space-around;
   align-items: center;
   height: 40px;
-  background-color: #3339;
+  background-color: #aaa9;
 }
 
-.navbar > a {
-  color: rgb(75, 22, 22);
+.navbar__link {
+  color:black;
   font-weight: bold;
+}
+
+.navbar__link--active {
+  color: rgb(34, 108, 178);
 }
 
 .container {
@@ -30,29 +34,45 @@
 .container > h1 {
   font-size: 3em;
   font-family: 'Permanent Marker', cursive;
-  color: firebrick;
+  color:  rgb(34, 108, 178);
   margin: 24px;
+  align-self: center;
 }
 
 .container > p {
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+  padding: 15px;
+  border-bottom: 1px solid  rgb(34, 108, 178);
+  margin: 5px 0;
+}
+
+#signin-login {
   margin: 16px;
-  color: firebrick;
+  color:  rgb(34, 108, 178);
   font-weight: bold;
   text-decoration: underline;
 }
 
-.container > p:hover {
+#signin-login:hover {
   cursor: pointer;
 }
 
 .container > form {
-  border: 2px solid rgba(95, 22, 22, 0.6);
+  border: 2px solid rgb(34, 108, 178);
   padding: 20px;
+  margin: 15px;
   border-radius: 5px;
   background-color: #aaa9;
   width: 40%;
   display: flex;
   flex-direction: column;
+}
+
+.container > form > h2 {
+  padding: 10px;
+  text-align: center;
 }
 
 .container > form > input {
@@ -75,28 +95,29 @@
 }
 
 .issueContainer {
-  border: 2px solid rgba(95, 22, 22, 0.6);
+  border: 2px solid  rgb(34, 108, 178);
   padding: 20px;
   border-radius: 5px;
   background-color: rgba(211, 210, 210, 0.6);
   margin: 10px;
+  flex-wrap: wrap;
 }
 
 .issuePostContent {
   margin: 10px;
-  color: firebrick;
+  font-style: italic;
 }
 
 .issueContainer > p, span {
   padding: 5px;
 }
 
-.issueContainer > button {
+.issueContainer > form > button {
   padding: 5px;
   cursor: pointer;
 }
 
-.issueContainer > input {
+.issueContainer > form > input {
   padding: 5px;
   margin: 5px;
   width: 75%;
@@ -107,6 +128,11 @@ hr {
 }
 
 #usernameOnIssue {
-  color: firebrick;
+  color:  rgb(34, 108, 178);
   font-weight: bold;
+}
+
+.comment {
+  font-style: italic;
+  padding: 5px;
 }

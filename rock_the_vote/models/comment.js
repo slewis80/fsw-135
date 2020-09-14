@@ -8,19 +8,13 @@ const commentSchema = new Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true
+        ref: "User"
     },
     issue: {
         type: Schema.Types.ObjectId,
-        ref: "Issue",
-        required: true
+        ref: "Issue"
     },
-    postTitle: {
-        type: String,
-        required: true
-    },
-    post: {
+    comment: {
         type: String,
         required: true
     }

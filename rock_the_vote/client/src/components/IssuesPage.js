@@ -12,9 +12,7 @@ export default function IssuesPage(props) {
     useEffect(() => {
         axios.get("/publicIssues")
             .then(res => {
-                let data = res.data
-                data.sort((a, b) => (a.upvotes > b.upvotes) ? 1 : (a.upvotes === b.upvotes) ? ((a.postDate > b.postDate) ? 1 : -1) : -1 )
-                setIssues(data)
+                setIssues(res.data)
             })
             .catch(err => console.log(err.response.data.errMsg))
     }, [])
@@ -22,6 +20,9 @@ export default function IssuesPage(props) {
     return (
         <div className="container">
             <h1>Issues</h1>
+            <p>This page lists of all the issues for the site, with the highest upvotes showing first. 
+                <br/>
+                As a registered user, you can vote or comment on any post or create a post of your own!</p>
             <IssuesList issues={issues} userAxios={userAxios} />
         </div>
     )

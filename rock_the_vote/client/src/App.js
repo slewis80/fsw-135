@@ -6,8 +6,8 @@ import IssuesPage from './components/IssuesPage.js';
 import Navbar from './components/Navbar.js';
 import ProtectedRoute from './components/ProtectedRoute.js';
 import {UserContext} from './context/UserProvider.js';
-import {IssueContext} from './context/IssueProvider.js';
 import MyStuff from './components/MyStuff.js';
+import IssuesByUser from './components/IssuesByUser.js';
 
 
 function App() {
@@ -26,7 +26,7 @@ const { token, logout, userAxios } = useContext(UserContext)
           token={token}
         />
         <Route
-          path="/issues" render={() => <IssuesPage userAxios={userAxios} />} />
+          exact path="/issues" render={() => <IssuesPage userAxios={userAxios} />} />
         <ProtectedRoute
           path="/mystuff" 
           component={MyStuff} 
@@ -34,6 +34,10 @@ const { token, logout, userAxios } = useContext(UserContext)
           redirectTo="/"
           token={token}
         />
+        <Route 
+          name="issuesbyuser"
+          path="/issues/:user" 
+          render={() => <IssuesByUser userAxios={userAxios} />} />
       </Switch>
     </div>
   );

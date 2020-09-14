@@ -14,9 +14,12 @@ commentRouter.route("/")
             return res.status(200).send(comments)
         })
     })
-    .post((req, res, next) => {
+
+    commentRouter.post("/:issueId", (req, res, next) => {
         req.body.user = req.user._id
+        req.body.issue = req.params.issueId
         const newComment = new Comment(req.body)
+        console.log(req.body)
         newComment.save((err, savedComment) => {
             if(err){
                 res.status(500)
@@ -38,8 +41,8 @@ commentRouter.get("/user", (req, res, next) => {
 })
 
 // get all by issue
-commentRouter.get("/issue", (req, res, next) => {
-    Comment.find({ issue: req.params.issue._id }, (err, comments) => {
+commentRouter.get("/issue/:issueId", (req, res, next) => {
+    Comment.find({ issue: req.params.issueId }, (err, comments) => {
         if(err){
             res.status(500)
             return next(err)

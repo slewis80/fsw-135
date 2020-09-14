@@ -18,6 +18,7 @@ export default function MyStuff(props) {
     return (
         <div className="container">
             <h1>My Stuff</h1>
+            <p>This is your go-to page for all of your personally posted issues...</p>
             <IssuesList issues={userIssues} userAxios={userAxios} />
         </div>
     )

@@ -3,6 +3,7 @@ const issueRouter = express.Router()
 const Issue = require('../models/issue.js')
 const jwt = require('jsonwebtoken')
 const user = require('../models/user.js')
+const issue = require('../models/issue.js')
 
 
 // get all, post new
@@ -26,10 +27,8 @@ issueRouter.route("/")
                 res.status(500)
                 return next(err)
             }
-            return res.status(201).send(savedIssue)
+            return res.status(201).send(`Successfully added new issue...`)
         })
-        .populate('user', 'username')
-        .exec()
     })
 
 
@@ -42,6 +41,21 @@ issueRouter.get("/user", (req, res, next) => {
         }
         return res.status(200).send(issues)
     })
+    .sort({'postDate': 'descending'})
+    .populate('user', 'username')
+    .exec()
+})
+
+// get all by other user
+issueRouter.get("/user/:userId", (req, res, next) => {
+    Issue.find({ user: req.userId }, (err, issues) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(issues)
+    })
+    .sort({'postDate': 'descending'})
     .populate('user', 'username')
     .exec()
 })
@@ -104,41 +118,31 @@ issueRouter.route("/:issueId")
     // add upvotes / downvotes by ID
     issueRouter.put("/upvote/:issueId", 
         (req, res, next) => {
-            console.log(req.params)
             Issue.findOneAndUpdate({ _id: req.params.issueId},
-                req.body,
-                { new: true },
-                (err, updatedIssue) => {
-                    if(err){
-                        res.status(500)
-                        return next(err)
-                    }
-                    if(!updatedIssue){
-                        res.status(403)
-                        return next(new Error(`No item found with the id ${req.params.issueId}`))
-                    }    
-                    return res.status(200).send(updatedIssue)
-                })
+            { $inc: {upvotes: 1}, $push: {usersVoted: {user: req.user._id}} },
+            { new: true },
+            (err, updatedIssue) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send(updatedIssue)
+            })
             .populate('user', 'username')
             .exec()    
         })
         issueRouter.put("/downvote/:issueId", 
         (req, res, next) => {
-            console.log(req.params)
             Issue.findOneAndUpdate({ _id: req.params.issueId},
-                req.body,
-                { new: true },
-                (err, updatedIssue) => {
-                    if(err){
-                        res.status(500)
-                        return next(err)
-                    }
-                    if(!updatedIssue){
-                        res.status(403)
-                        return next(new Error(`No item found with the id ${req.params.issueId}`))
-                    }    
-                    return res.status(200).send(updatedIssue)
-                })
+            { $inc: {downvotes: 1}, $push: {usersVoted: {user: req.user._id}} },
+            { new: true },
+            (err, updatedIssue) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send(updatedIssue)
+            })
             .populate('user', 'username')
             .exec()    
         })

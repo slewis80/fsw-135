@@ -13,10 +13,9 @@ export default function Profile(props) {
     return (
         <div className="container">
             <h1>Welcome {username}</h1>
-            <hr/>
-            <h2>Add a new post...</h2>
+            <p>Here is your main profile page...</p>
             <NewIssueForm
-                addIssue={addIssue}/>
+                addIssue={addIssue} />
         </div>
     )
 }

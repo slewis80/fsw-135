@@ -50,7 +50,7 @@ export default function Auth() {
                     btnTxt="Sign Up"
                     errMsg={errMsg}
                 />
-                <p onClick={toggleForm}>Already A Member?</p>
+                <h3 id="signin-login" onClick={toggleForm}>Already A Member?</h3>
                 </>
             :
                 <>
@@ -61,7 +61,7 @@ export default function Auth() {
                     btnTxt="Log In"
                     errMsg={errMsg}
                 />
-                <p onClick={toggleForm}>Not A Member?</p>
+                <h3 id="signin-login" onClick={toggleForm}>Not A Member?</h3>
                 </>
             }
         </div>
